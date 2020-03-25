@@ -26,11 +26,17 @@ class Row:
         rowItemCount = 0
         # for each item in row... if 0 or 2 count goes up, if 1, count resets to 0 and is added to currentRowNumbers
         for i in range(0,len(self.rowContent)):
-            if self.rowContent[i] == 0 or self.rowContent[i] ==2:
+            if self.rowContent[i] == 0 or self.rowContent[i] == 2:
                 rowItemCount += 1
             elif self.rowContent[i] == 1:
-                currentRowNumbers.append(rowItemCount)
+                if rowItemCount != 0:
+                    currentRowNumbers.append(rowItemCount)
                 rowItemCount = 0
+        if rowItemCount > 0:
+            currentRowNumbers.append(rowItemCount)
+        if currentRowNumbers == []:
+            currentRowNumbers = [0]
+        
         return currentRowNumbers
     # if row is full with no numbers
     def isfull(self):

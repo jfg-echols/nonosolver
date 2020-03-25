@@ -5,7 +5,7 @@ class TestRow(unittest.TestCase):
     # TODO - put this in a mock statement
 
     def test_init_row(self):
-        testrow = Row([5],"00000")
+        testrow = Row([5],"11111")
         self.assertEqual(testrow.numbers,[5])
     def test_init_rowvalue(self):
         testrow = Row([5],"12201")
@@ -38,6 +38,14 @@ class TestRow(unittest.TestCase):
         testrow6 = Row([1,2],"21000")
         testresult6 = testrow6.getRowContent()
         self.assertEqual(testresult6,[1,3])
+    def test_init_rowItemCounts7(self):
+        testrow7 = Row([3,4],"1000100021")
+        testresult7 = testrow7.getRowContent()
+        self.assertEqual(testresult7,[3,4])
+    def test_init_rowItemCounts8(self):
+        testrow8 = Row([1,10,2,1,1],"21200000220011001210")
+        testresult8 = testrow8.getRowContent()
+        self.assertEqual(testresult8,[1,10,2,1,1])
     def test_init_rowisfullbasic(self):
         testrow = Row([5],"00000")
         testrow.isfull()
