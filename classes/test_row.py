@@ -46,10 +46,38 @@ class TestRow(unittest.TestCase):
         testrow8 = Row([1,10,2,1,1],"21200000220011001210")
         testresult8 = testrow8.getRowContent()
         self.assertEqual(testresult8,[1,10,2,1,1])
-    def test_init_rowisfullbasic(self):
+    def test_init_isRowFull(self):
+        testrow = Row([5],"0222220")
+        self.assertEqual(testrow.isRowFull(),False)
+    def test_init_isRowFull2(self):
+        testrow2 = Row([5],"1222221")
+        self.assertEqual(testrow2.isRowFull(),True)
+    def test_init_countRowNumbers(self):
         testrow = Row([5],"00000")
-        testrow.isfull()
+        testnumber = testrow.countRowNumbers()
+        self.assertEqual(testnumber,5)
+    def test_init_countRowNumbers2(self):
+        testrow2 = Row([5,4],"0000000000")
+        testnumber2 = testrow2.countRowNumbers()
+        self.assertEqual(testnumber2,10)
+    def test_init_countRowNumbers3(self):
+        testrow3 = Row([5,4,3,2,1],"0000000000000000000")
+        testnumber3 = testrow3.countRowNumbers()
+        self.assertEqual(testnumber3,19)
+    def test_init_fillRowOnePassFull(self):
+        testrow = Row([5],"00000")
+        testrow.fillRowOnePass()
         self.assertEqual(testrow.rowContent,[2,2,2,2,2])
+    def test_init_fillRowOnePassEmpty(self):
+        testrow2 = Row([0],"00000")
+        testrow2.fillRowOnePass()
+        self.assertEqual(testrow2.rowContent,[1,1,1,1,1])
+    def test_init_fillRowOnePassMiscSize(self):
+        testrow3 = Row([1,6,1],"0000000000")
+        testrow3.fillRowOnePass()
+        self.assertEqual(testrow3.rowContent,[2,1,2,2,2,2,2,2,1,2])
+    
+
 
 if __name__ == '__main__':
     unittest.main()
